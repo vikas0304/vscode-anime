@@ -78,4 +78,4 @@ You can customize your experience in `Settings > Extensions > Anime Coder`:
 - Sprite art generated with AI for the initial release.
 
 ---
-**Enjoying Anime Coder?** Leave a ⭐ on the [GitHub repository](https://github.com/ITAAKASH/vscode-anime)!
+**Enjoying Anime Coder?** Leave a ⭐ on the [GitHub repository](https://github.com/vikas0304/vscode-anime)!
