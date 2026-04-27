@@ -1,0 +1,214 @@
+{
+    "name": "vscode-anime",
+    "displayName": "Anime Coder",
+    "description": "Cute anime characters running in your VS Code editor — Naruto, Goku, Luffy & more!",
+    "version": "1.0.0",
+    "engines": {
+        "vscode": "^1.74.0"
+    },
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/ITAAKASH/vscode-anime"
+    },
+    "publisher": "vikaspal",
+    "pricing": "Free",
+    "categories": [
+        "Other"
+    ],
+    "keywords": [
+        "anime",
+        "naruto",
+        "goku",
+        "luffy",
+        "pets",
+        "pixelart",
+        "vscode",
+        "fun",
+        "otaku"
+    ],
+    "license": "MIT",
+    "icon": "icon.png",
+    "activationEvents": [
+        "onCommand:anime-coder.start",
+        "onWebviewPanel:animeCoding",
+        "onView:explorer",
+        "onView:animeView",
+        "onStartupFinished"
+    ],
+    "main": "./out/extension/extension.js",
+    "contributes": {
+        "views": {
+            "explorer": [
+                {
+                    "type": "webview",
+                    "id": "animeView",
+                    "name": "Anime Coder",
+                    "when": "anime-coder.position == 'explorer'",
+                    "icon": "media/icon/dark-add.svg"
+                }
+            ]
+        },
+        "menus": {
+            "view/title": [
+                {
+                    "command": "anime-coder.spawn-character",
+                    "when": "view == animeView",
+                    "group": "navigation@1"
+                },
+                {
+                    "command": "anime-coder.spawn-random",
+                    "when": "view == animeView",
+                    "group": "navigation@2"
+                },
+                {
+                    "command": "anime-coder.remove-character",
+                    "when": "view == animeView",
+                    "group": "navigation@3"
+                }
+            ]
+        },
+        "commands": [
+            {
+                "command": "anime-coder.start",
+                "title": "Start anime coding session",
+                "category": "Anime Coder"
+            },
+            {
+                "command": "anime-coder.spawn-character",
+                "title": "Spawn anime character",
+                "category": "Anime Coder",
+                "icon": {
+                    "dark": "media/icon/dark-add.svg",
+                    "light": "media/icon/light-add.svg"
+                }
+            },
+            {
+                "command": "anime-coder.spawn-random",
+                "title": "Spawn random anime character",
+                "category": "Anime Coder",
+                "icon": {
+                    "dark": "media/icon/dark-random.svg",
+                    "light": "media/icon/light-random.svg"
+                }
+            },
+            {
+                "command": "anime-coder.remove-character",
+                "title": "Remove anime character",
+                "category": "Anime Coder",
+                "icon": {
+                    "dark": "media/icon/dark-trash.svg",
+                    "light": "media/icon/light-trash.svg"
+                }
+            },
+            {
+                "command": "anime-coder.remove-all",
+                "title": "Remove all anime characters",
+                "category": "Anime Coder"
+            },
+            {
+                "command": "anime-coder.roll-call",
+                "title": "Roll-call",
+                "category": "Anime Coder"
+            }
+        ],
+        "keybindings": [
+            {
+                "command": "anime-coder.spawn-character",
+                "key": "alt+shift+a",
+                "mac": "alt+shift+a"
+            },
+            {
+                "command": "anime-coder.spawn-random",
+                "key": "alt+shift+r",
+                "mac": "alt+shift+r"
+            },
+            {
+                "command": "anime-coder.remove-character",
+                "key": "alt+shift+d",
+                "mac": "alt+shift+d"
+            },
+            {
+                "command": "anime-coder.remove-all",
+                "key": "alt+shift+backspace",
+                "mac": "alt+shift+backspace"
+            }
+        ],
+        "configuration": [
+            {
+                "title": "Anime Coder",
+                "properties": {
+                    "anime-coder.characterSize": {
+                        "type": "string",
+                        "enum": [
+                            "nano",
+                            "small",
+                            "medium",
+                            "large"
+                        ],
+                        "default": "medium",
+                        "description": "Size of the anime characters"
+                    },
+                    "anime-coder.position": {
+                        "type": "string",
+                        "enum": [
+                            "panel",
+                            "explorer"
+                        ],
+                        "default": "explorer",
+                        "description": "Where to display the anime characters"
+                    },
+                    "anime-coder.theme": {
+                        "type": "string",
+                        "enum": [
+                            "none",
+                            "konoha",
+                            "capsulecorp",
+                            "grandline"
+                        ],
+                        "default": "none",
+                        "description": "Background theme for your anime characters"
+                    },
+                    "anime-coder.defaultCharacters": {
+                        "type": "array",
+                        "items": {
+                            "type": "object",
+                            "properties": {
+                                "type": {
+                                    "type": "string",
+                                    "description": "Character type (e.g., 'naruto', 'goku', 'luffy')"
+                                },
+                                "name": {
+                                    "type": "string",
+                                    "description": "Custom name for the character (optional)"
+                                }
+                            },
+                            "required": [
+                                "type"
+                            ]
+                        },
+                        "default": [],
+                        "description": "List of default characters to spawn on startup"
+                    }
+                }
+            }
+        ]
+    },
+    "scripts": {
+        "vscode:prepublish": "npm run compile",
+        "compile:panel": "webpack --mode production",
+        "compile:extension": "tsc -p ./tsconfig.extension.json",
+        "compile": "npm run compile:panel && npm run compile:extension",
+        "watch": "webpack --mode development && tsc -watch -p ./tsconfig.extension.json",
+        "watch:panel": "webpack --mode development --watch",
+        "lint": "eslint src --ext ts",
+        "package": "vsce package"
+    },
+    "devDependencies": {
+        "@types/node": "^18.0.0",
+        "@types/vscode": "^1.74.0",
+        "ts-loader": "^9.5.0",
+        "typescript": "^5.3.0",
+        "webpack": "^5.90.0",
+        "webpack-cli": "^5.1.0"
+    }
+}

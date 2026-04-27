@@ -1,0 +1,106 @@
+/* ─── Anime Coder Panel Styles ─────────────────────────────────────────── */
+
+#animeContainer {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    min-height: 200px;
+    overflow: hidden;
+    background: transparent;
+}
+
+/* ─── Theme Backgrounds ────────────────────────────────────────────────── */
+
+#animeContainer.theme-konoha {
+    background: linear-gradient(180deg, #87CEEB 0%, #90EE90 60%, #228B22 100%);
+}
+
+#animeContainer.theme-capsulecorp {
+    background: linear-gradient(180deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+}
+
+#animeContainer.theme-grandline {
+    background: linear-gradient(180deg, #87CEEB 0%, #4682B4 50%, #1E90FF 80%, #DAA520 100%);
+}
+
+/* ─── Foreground Layer ─────────────────────────────────────────────────── */
+
+#foreground {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 100%;
+    background-size: contain;
+    background-repeat: repeat-x;
+    background-position: bottom;
+    pointer-events: none;
+    display: none;
+    z-index: 5;
+}
+
+/* ─── Anime Character ──────────────────────────────────────────────────── */
+
+.anime-character {
+    position: absolute;
+    bottom: 0;
+    cursor: pointer;
+    transition: transform 0.1s ease;
+    z-index: 10;
+    user-select: none;
+}
+
+.anime-character:hover {
+    filter: brightness(1.2) drop-shadow(0 0 6px rgba(255, 255, 255, 0.6));
+}
+
+.anime-character img {
+    display: block;
+    image-rendering: pixelated;
+    image-rendering: -moz-crisp-edges;
+    image-rendering: crisp-edges;
+    pointer-events: none;
+}
+
+/* ─── Character Name Label ─────────────────────────────────────────────── */
+
+.character-name {
+    position: absolute;
+    top: -24px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: rgba(0, 0, 0, 0.75);
+    color: #fff;
+    padding: 2px 8px;
+    border-radius: 4px;
+    font-size: 11px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    white-space: nowrap;
+    pointer-events: none;
+    z-index: 20;
+    backdrop-filter: blur(4px);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+/* ─── Floor / Ground ───────────────────────────────────────────────────── */
+
+.anime-floor {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: var(--vscode-panel-border, rgba(255, 255, 255, 0.1));
+}
+
+/* ─── Animations ───────────────────────────────────────────────────────── */
+
+@keyframes float {
+    0%, 100% { transform: translateY(0px); }
+    50% { transform: translateY(-3px); }
+}
+
+@keyframes sparkle {
+    0%, 100% { opacity: 0; }
+    50% { opacity: 1; }
+}
